@@ -45,7 +45,7 @@ namespace AdventOfCode
         public Day02()
         {
             _values = File
-                .ReadAllLines(@"Inputs/input02.txt")
+                .ReadAllLines(Path.Combine("Inputs","input02.txt"))
                 .Select(line => { 
                     ParsePatternAndPassword(line, out var pattern, out var password);
                     return (pattern, password);

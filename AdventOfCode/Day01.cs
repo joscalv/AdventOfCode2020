@@ -10,7 +10,7 @@ namespace AdventOfCode
         public Day01()
         {
             _values = File
-                .ReadAllLines(@"Inputs/input01.txt")
+                .ReadAllLines(Path.Combine("Inputs", "input01.txt"))
                 .Select(int.Parse)
                 .ToArray();
         }
