@@ -20,14 +20,17 @@ namespace AdventOfCode
 
         public bool IsValid(string password)
         {
-            password
-                .ToCharArray()
-                .GroupBy(v => v)
-                .ToDictionary(g => g.Key, g => g.Count())
-                .TryGetValue(Character, out var repeats);
 
+            int repeats = 0;
+            for (int i = 0; i < password.Length; i++)
+            {
+                if (password[i] == Character)
+                {
+                    repeats++;
+                }
+            }
             return repeats >= MinRep && repeats <= MaxRep;
-            
+
         }
 
         public bool IsValidPolicy2(string password)
@@ -45,8 +48,9 @@ namespace AdventOfCode
         public Day02()
         {
             _values = File
-                .ReadAllLines(Path.Combine("Inputs","input02.txt"))
-                .Select(line => { 
+                .ReadAllLines(Path.Combine("Inputs", "input02.txt"))
+                .Select(line =>
+                {
                     ParsePatternAndPassword(line, out var pattern, out var password);
                     return (pattern, password);
                 })
@@ -57,7 +61,7 @@ namespace AdventOfCode
         {
             return _values.Where(pair => pair.Item1.IsValid(pair.Item2)).Count();
         }
-        
+
         public int ExecutePart2()
         {
             return _values.Where(pair => pair.Item1.IsValidPolicy2(pair.Item2)).Count();
@@ -69,9 +73,9 @@ namespace AdventOfCode
             try
             {
                 var patternString = parts[0];
-                var patternParts= patternString.Split(' ');
-                
-                
+                var patternParts = patternString.Split(' ');
+
+
                 var character = patternParts[1][0];
 
                 var minMax = patternParts[0].Split('-');
@@ -81,7 +85,7 @@ namespace AdventOfCode
                 pattern = new Pattern(minRep, maxRep, character);
                 password = parts[1].Trim();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 pattern = null;
                 password = default(string);
@@ -89,10 +93,10 @@ namespace AdventOfCode
             }
         }
 
-       
 
-       
 
-       
+
+
+
     }
 }
