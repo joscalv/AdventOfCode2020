@@ -13,7 +13,11 @@ namespace AdventOfCode2020Console
             Console.WriteLine($"{Environment.NewLine}--- Day 1: Report Repair ---");
             var day1 = new Day01();
             ExecuteSolution("1.1 ", day1.ExecutePart1);
-            ExecuteSolution("1.2 ", day1.ExecutePart2);
+                ExecuteSolution("1.2 ", day1.ExecutePart2);
+
+            var day2 = new Day02();
+            ExecuteSolution("2.1 ", day2.ExecutePart1);
+            ExecuteSolution("2.1 ", day2.ExecutePart2);
         }
 
         private static void ExecuteSolution(string title, Func<long> solution)
