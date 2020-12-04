@@ -22,6 +22,10 @@ namespace AdventOfCode2020Console
             var day3 = new Day03();
             ExecuteSolution("3.1 ", day3.ExecutePart1);
             ExecuteSolution("3.2 ", day3.ExecutePart2);
+            
+            var day4 = new Day04();
+            ExecuteSolution("4.1 ", day4.ExecutePart1);
+            ExecuteSolution("4.2 ", day4.ExecutePart2);
         }
 
         private static void ExecuteSolution(string title, Func<long> solution)
