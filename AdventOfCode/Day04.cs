@@ -36,13 +36,12 @@ namespace AdventOfCode
         {
             return
                 IsIntMinMax(passport.byr, 192, 2002)
-            && IsIntMinMax(passport.iyr, 2010, 2020)
-            && IsIntMinMax(passport.eyr, 2020, 2030)
+                && IsIntMinMax(passport.iyr, 2010, 2020)
+                && IsIntMinMax(passport.eyr, 2020, 2030)
             && IsHeight(passport.hgt)
             && IsHexColor(passport.hcl)
             && IsEyesColor(passport.ecl)
             && IsPid(passport.pid);
-
         }
 
         public static bool IsPid(string pid)
@@ -50,15 +49,10 @@ namespace AdventOfCode
             return IsIntMinMax(pid, 0, 999999999, 9);
         }
 
+        private static readonly HashSet<string> _colors = new HashSet<string> { "amb", "blu", "brn", "gry", "grn", "hzl", "oth" };
         public static bool IsEyesColor(string color)
         {
-            return color == "amb"
-                || color == "blu"
-                || color == "brn"
-                || color == "gry"
-                || color == "grn"
-                || color == "hzl"
-                || color == "oth";
+            return _colors.Contains(color);
         }
 
         public static bool IsHexColor(string color)
@@ -147,12 +141,14 @@ namespace AdventOfCode
     public class Day04
     {
         private readonly string[] _lines;
+        private readonly IEnumerable<Passport> _passports;
 
         public Day04()
         {
             _lines = File
                   .ReadAllLines(Path.Combine("Inputs", "input04.txt"))
                   .ToArray();
+            _passports = PassportUtils.ParsePassports(_lines);
         }
 
         public long ExecutePart1()
@@ -164,9 +160,7 @@ namespace AdventOfCode
 
         public long ExecutePart2()
         {
-            var passports = PassportUtils.ParsePassports(_lines);
-
-            return passports.Count(p => p.IsValidComplexChecks());
+            return _passports.Count(p => p.IsValidComplexChecks());
         }
     }
 }
