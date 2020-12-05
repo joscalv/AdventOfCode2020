@@ -28,12 +28,15 @@ namespace AdventOfCode
         {
             var ids= _lines
                 .Select(l => new BoardingPass(l).GetSeatId())
-                .OrderBy(id=>id).ToArray();
+                .OrderBy(id=>id)
+                .ToArray();
 
             for (int i = 0; i < ids.Length-1; i++)
             {
                 if (ids[i+1] - ids[i]==2)
+                {
                     return ids[i]+1;
+                }
             }
 
             return -1;
@@ -68,7 +71,7 @@ namespace AdventOfCode
             else
             {
                 return isUpper
-                    ? (range.lower + (int)Math.Round(middle + 0.001, 0), range.upper)
+                    ? (range.lower + (int)Math.Ceiling(middle), range.upper)
                     : (range.lower, range.lower + (int)middle);
             }
         }
