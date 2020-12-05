@@ -51,7 +51,6 @@ namespace AdventOfCode
                 currentY += incY;
                 currentX += incX;
                 numberOfTrees = numberOfTrees + (map.GetPosition(currentX, currentY) == PositionType.Tree ? 1 : 0);
-
             }
             return numberOfTrees;
         }

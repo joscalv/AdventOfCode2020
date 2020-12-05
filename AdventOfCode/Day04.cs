@@ -19,6 +19,8 @@ namespace AdventOfCode
 
     public static class PassportUtils
     {
+        private static readonly Regex EyeColorRegexp = new Regex("^#([a-fA-F0-9]{6})$", RegexOptions.Compiled);
+
         public static bool IsValidBasicChecks(this Passport passport)
         {
             return
@@ -57,7 +59,7 @@ namespace AdventOfCode
 
         public static bool IsHexColor(string color)
         {
-            return !string.IsNullOrEmpty(color) && Regex.IsMatch(color, "^#([a-fA-F0-9]{6})$");
+            return !string.IsNullOrEmpty(color) && EyeColorRegexp.IsMatch(color);
         }
 
         public static bool IsHeight(string height)
@@ -153,9 +155,7 @@ namespace AdventOfCode
 
         public long ExecutePart1()
         {
-            var passports = PassportUtils.ParsePassports(_lines);
-
-            return passports.Count(p => p.IsValidBasicChecks());
+            return _passports.Count(p => p.IsValidBasicChecks());
         }
 
         public long ExecutePart2()

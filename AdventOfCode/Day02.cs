@@ -20,7 +20,6 @@ namespace AdventOfCode
 
         public bool IsValid(string password)
         {
-
             int repeats = 0;
             for (int i = 0; i < password.Length; i++)
             {
