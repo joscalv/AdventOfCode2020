@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using AdventOfCode;
 
@@ -9,6 +10,7 @@ namespace AdventOfCode2020Console
     {
         static async Task Main(string[] args)
         {
+
             Console.WriteLine("*** AdventOfCode2020 ***");
             Console.WriteLine($"{Environment.NewLine}--- Day 1: Report Repair ---");
             var day1 = new Day01();
@@ -30,6 +32,10 @@ namespace AdventOfCode2020Console
             var day5 = new Day05();
             ExecuteSolution("5.1", day5.ExecutePart1);
             ExecuteSolution("5.2", day5.ExecutePart2);
+
+            var day6 = new Day06();
+            ExecuteSolution("6.1", day6.ExecutePart1);
+            ExecuteSolution("6.2", day6.ExecutePart2);
         }
 
         private static void ExecuteSolution(string title, Func<long> solution)
@@ -55,7 +61,7 @@ namespace AdventOfCode2020Console
 
         private static double CalculateMilliseconds(Stopwatch stopwatch)
         {
-            return 1000 * stopwatch.ElapsedTicks / (double) Stopwatch.Frequency;
+            return 1000 * stopwatch.ElapsedTicks / (double)Stopwatch.Frequency;
         }
     }
 }

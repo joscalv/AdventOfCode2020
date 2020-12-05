@@ -9,7 +9,7 @@ namespace AdventOfCode
         Tree
     }
 
-    public class Day03
+    public class Day03 : IAdventOfCodeDay<long, long>
     {
         private Map _map;
 

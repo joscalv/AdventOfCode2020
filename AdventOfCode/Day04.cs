@@ -40,10 +40,10 @@ namespace AdventOfCode
                 IsIntMinMax(passport.byr, 192, 2002)
                 && IsIntMinMax(passport.iyr, 2010, 2020)
                 && IsIntMinMax(passport.eyr, 2020, 2030)
-            && IsHeight(passport.hgt)
-            && IsHexColor(passport.hcl)
-            && IsEyesColor(passport.ecl)
-            && IsPid(passport.pid);
+                && IsHeight(passport.hgt)
+                && IsHexColor(passport.hcl)
+                && IsEyesColor(passport.ecl)
+                && IsPid(passport.pid);
         }
 
         public static bool IsPid(string pid)
@@ -51,10 +51,11 @@ namespace AdventOfCode
             return IsIntMinMax(pid, 0, 999999999, 9);
         }
 
-        private static readonly HashSet<string> _colors = new HashSet<string> { "amb", "blu", "brn", "gry", "grn", "hzl", "oth" };
         public static bool IsEyesColor(string color)
         {
-            return _colors.Contains(color);
+            return color == "amb" || color == "blu" || color == "brn" || color == "gry" || color == "grn" ||
+                   color == "hzl" || color == "oth";
+
         }
 
         public static bool IsHexColor(string color)
@@ -64,16 +65,17 @@ namespace AdventOfCode
 
         public static bool IsHeight(string height)
         {
-            if (string.IsNullOrEmpty(height))
+            int length;
+            if (height == null || (length= height.Length)<2)
             {
                 return false;
             }
 
-            if (height.EndsWith("cm"))
+            if (height[length-1]== 'm' && height[length - 2] == 'c')
             {
                 return IsIntMinMax(height.Substring(0, height.Length - 2), 150, 193);
             }
-            else if (height.EndsWith("in"))
+            if (height[length-1]== 'n' && height[length - 2] == 'i')
             {
                 return IsIntMinMax(height.Substring(0, height.Length - 2), 59, 76);
             }
@@ -100,7 +102,7 @@ namespace AdventOfCode
                 .ToList()
                 .ForEach(kvps =>
                 {
-                    passportType.GetProperty(kvps.key).SetValue(passport, kvps.value);
+                    passportType.GetProperty(kvps.key ?? string.Empty)?.SetValue(passport, kvps.value);
                 });
 
             return passport;
@@ -140,17 +142,16 @@ namespace AdventOfCode
         }
     }
 
-    public class Day04
+    public class Day04 : IAdventOfCodeDay<long, long>
     {
-        private readonly string[] _lines;
         private readonly IEnumerable<Passport> _passports;
 
         public Day04()
         {
-            _lines = File
-                  .ReadAllLines(Path.Combine("Inputs", "input04.txt"))
-                  .ToArray();
-            _passports = PassportUtils.ParsePassports(_lines);
+            var lines = File
+                .ReadAllLines(Path.Combine("Inputs", "input04.txt"))
+                .ToArray();
+            _passports = PassportUtils.ParsePassports(lines);
         }
 
         public long ExecutePart1()

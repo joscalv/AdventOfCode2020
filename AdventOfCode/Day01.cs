@@ -3,7 +3,13 @@ using System.Linq;
 
 namespace AdventOfCode
 {
-    public class Day01
+    public interface IAdventOfCodeDay<out TPart1, out TPart2>
+    {
+        TPart1 ExecutePart1();
+        TPart2 ExecutePart2();
+    }
+
+    public class Day01 : IAdventOfCodeDay<long, long>
     {
 
         private int[] _values;

@@ -6,7 +6,7 @@ namespace AdventOfCode
 {
 
 
-    public class Day05
+    public class Day05 : IAdventOfCodeDay<long, long>
     {
         private readonly string[] _lines;
 

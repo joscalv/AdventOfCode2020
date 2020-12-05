@@ -39,7 +39,7 @@ namespace AdventOfCode
         }
     }
 
-    public class Day02
+    public class Day02 : IAdventOfCodeDay<int, int>
     {
 
         private List<(Pattern, string)> _values;
