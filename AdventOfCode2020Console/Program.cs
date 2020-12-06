@@ -34,8 +34,10 @@ namespace AdventOfCode2020Console
             ExecuteSolution("5.2", day5.ExecutePart2);
 
             var day6 = new Day06();
-            ExecuteSolution("6.1", day6.ExecutePart1);
-            ExecuteSolution("6.2", day6.ExecutePart2);
+            ExecuteSolution("6.1 Loop", day6.ExecutePart1);
+            ExecuteSolution("6.1 Linq", day6.ExecutePart1Linq);
+            ExecuteSolution("6.2 Loop", day6.ExecutePart2);
+            ExecuteSolution("6.2 Linq", day6.ExecutePart2Linq);
         }
 
         private static void ExecuteSolution(string title, Func<long> solution)
@@ -54,14 +56,14 @@ namespace AdventOfCode2020Console
             clock.Start();
             var result = solution.Invoke().ToString();
             clock.Stop();
-            string separator = (result.Length > 40) ? Environment.NewLine : $"\t";
-
-            Console.WriteLine($"{title}{separator}{result}{separator}{CalculateMilliseconds(clock)} ms.");
+            string separator = "|";
+           
+            Console.WriteLine($"{separator}{title.PadRight(20)}{separator}{result.PadLeft(15)}{separator}{CalculateMilliseconds(clock).PadLeft(10)}{separator}");
         }
 
-        private static double CalculateMilliseconds(Stopwatch stopwatch)
+        private static string CalculateMilliseconds(Stopwatch stopwatch)
         {
-            return 1000 * stopwatch.ElapsedTicks / (double)Stopwatch.Frequency;
+            return ($"{(1000 * stopwatch.ElapsedTicks / (double)Stopwatch.Frequency):F2}ms");
         }
     }
 }
