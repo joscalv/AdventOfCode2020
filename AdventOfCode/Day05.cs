@@ -26,16 +26,16 @@ namespace AdventOfCode
 
         public long ExecutePart2()
         {
-            var ids= _lines
+            var ids = _lines
                 .Select(l => new BoardingPass(l).GetSeatId())
-                .OrderBy(id=>id)
+                .OrderBy(id => id)
                 .ToArray();
 
-            for (int i = 0; i < ids.Length-1; i++)
+            for (int i = 0; i < ids.Length - 1; i++)
             {
-                if (ids[i+1] - ids[i]==2)
+                if (ids[i + 1] - ids[i] == 2)
                 {
-                    return ids[i]+1;
+                    return ids[i] + 1;
                 }
             }
 

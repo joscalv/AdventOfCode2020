@@ -16,6 +16,7 @@ namespace AdventOfCode2020Benchmarks
         private static readonly Day03 _day03= new Day03();
         private static readonly Day04 _day04= new Day04();
         private static readonly Day05 _day05= new Day05();
+        private static readonly Day06 _day06= new Day06();
 
         [Benchmark]
         public void Day01_1() => _day01.ExecutePart1();
@@ -46,5 +47,17 @@ namespace AdventOfCode2020Benchmarks
 
         [Benchmark]
         public void Day05_2() => _day05.ExecutePart2();
+        
+        [Benchmark]
+        public void Day06_1_Loop() => _day06.ExecutePart1();
+
+        [Benchmark]
+        public void Day06_1_Linq() => _day06.ExecutePart2Linq(); 
+        
+        [Benchmark]
+        public void Day06_2_Loop() => _day06.ExecutePart1();
+
+        [Benchmark]
+        public void Day06_2_Linq() => _day06.ExecutePart2Linq();
     }
 }
