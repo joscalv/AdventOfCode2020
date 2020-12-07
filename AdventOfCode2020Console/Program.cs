@@ -38,6 +38,11 @@ namespace AdventOfCode2020Console
             ExecuteSolution("6.1 Linq", day6.ExecutePart1Linq);
             ExecuteSolution("6.2 Loop", day6.ExecutePart2);
             ExecuteSolution("6.2 Linq", day6.ExecutePart2Linq);
+
+            var day7 = new Day07();
+            ExecuteSolution("7.1", day7.ExecutePart1);
+            ExecuteSolution("7.2", day7.ExecutePart2);
+
         }
 
         private static void ExecuteSolution(string title, Func<long> solution)

@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode", "AdventOfCod
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode2020Test", "AdventOfCode2020Test\AdventOfCode2020Test.csproj", "{23597489-2800-4523-A177-6AEB4A7C3AE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode2020Benchmarks", "AdventOfCode2020Benchmarks\AdventOfCode2020Benchmarks.csproj", "{838EEDB7-0481-4E4D-8D6E-535143A980BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode2020Benchmarks", "AdventOfCode2020Benchmarks\AdventOfCode2020Benchmarks.csproj", "{838EEDB7-0481-4E4D-8D6E-535143A980BE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A9003968-F509-4A59-A7EC-2E32BEF219DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +38,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{23597489-2800-4523-A177-6AEB4A7C3AE7} = {A9003968-F509-4A59-A7EC-2E32BEF219DB}
+		{838EEDB7-0481-4E4D-8D6E-535143A980BE} = {A9003968-F509-4A59-A7EC-2E32BEF219DB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0249AD58-E770-4206-8FF0-77A7414BCF94}
