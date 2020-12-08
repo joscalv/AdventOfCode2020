@@ -46,7 +46,7 @@ namespace AdventOfCode
 
         public static long ExecutePart2(SimpleComputer.Instruction[] input)
         {
-            var program = input.ToArray();
+            var program = input;
 
             for (int indexToReplace = 0; indexToReplace < program.Length; indexToReplace++)
             {
@@ -104,7 +104,7 @@ namespace AdventOfCode
                 { instructionJmp, ExecuteJmp}
         };
 
-        public static (int pc, int acc) ExecuteProgram(Instruction[] program, int loopLimit = -1)
+        public static ComputerStatus ExecuteProgram(Instruction[] program, int loopLimit = -1)
         {
             int pc = 0;
             int acc = 0;
@@ -113,13 +113,12 @@ namespace AdventOfCode
             while (pc < program.Length)
             {
                 var instruction = program[pc];
-                if (executed.TryGetValue(instruction.Index, out var n) && n >= loopLimit)
+                if (IsLoop(executed, pc, loopLimit))
                 {
-                    return (pc, acc);
+                    return new ComputerStatus(pc, acc);
                 }
                 else
                 {
-                    IncreaseExecutions(executed, instruction.Index);
                     if (_dFunc.TryGetValue(instruction.Code, out var func))
                     {
                         var newStatus = func.Invoke(instruction, pc, acc);
@@ -129,19 +128,28 @@ namespace AdventOfCode
                 }
             }
 
-            return (pc, acc);
+            return new ComputerStatus(pc, acc);
         }
 
-        private static void IncreaseExecutions(Dictionary<int, int> executions, int pc)
+        private static bool IsLoop(Dictionary<int, int> executions, int pc, int limit)
         {
+            if (limit < 0)
+            {
+                return false;
+            }
+
+            int n = 0;
             if (executions.ContainsKey(pc))
             {
-                executions[pc] = executions[pc] + 1;
+                n = executions[pc] + 1;
+                executions[pc] = n;
             }
             else
             {
+                n = 1;
                 executions.Add(pc, 1);
             }
+            return n > limit;
         }
 
         private static ComputerStatus ExecuteNop(Instruction instruction, int pc, int acc)

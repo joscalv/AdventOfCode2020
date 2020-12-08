@@ -19,6 +19,7 @@ namespace AdventOfCode2020Benchmarks
         private static readonly Day06 Day06= new Day06();
         private static readonly Day07 Day07= new Day07();
         private static readonly Day08 Day08= new Day08();
+        private static readonly Day08Simpler Day08Simpler = new Day08Simpler();
 
         [Benchmark]
         public void Day01_1() => Day01.ExecutePart1();
@@ -73,5 +74,11 @@ namespace AdventOfCode2020Benchmarks
 
         [Benchmark]
         public void Day08_2() => Day08.ExecutePart2();
+        
+        [Benchmark]
+        public void Day08Simpler_1() => Day08Simpler.ExecutePart1();
+
+        [Benchmark]
+        public void Day08Simpler_2() => Day08Simpler.ExecutePart2();
     }
 }

@@ -10,6 +10,7 @@ namespace AdventOfCode2020Test
     public class Day08Test
     {
         private readonly Day08 _day08 = new Day08();
+        private readonly Day08Simpler _day8Simpler = new Day08Simpler();
         private string _programTest1 = @"nop +0
 acc +1
 jmp +4
@@ -49,16 +50,16 @@ acc +6
         public void TestPart1Simpler()
         {
             int part1Solution = 1501;
-            var day8 = new Day08Simpler();
-            Assert.Equal(part1Solution, day8.ExecutePart1());
+            
+            Assert.Equal(part1Solution, _day8Simpler.ExecutePart1());
         } 
         
         [Fact]
         public void TestPart2Simpler()
         {
             int part1Solution = 509;
-            var day8 = new Day08Simpler();
-            Assert.Equal(part1Solution, day8.ExecutePart2());
+            
+            Assert.Equal(part1Solution, _day8Simpler.ExecutePart2());
         }
 
         [Fact]
