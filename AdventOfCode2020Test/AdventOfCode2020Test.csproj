@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Inputs\**" />
+    <EmbeddedResource Remove="Inputs\**" />
+    <None Remove="Inputs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
     <PackageReference Include="xunit" Version="2.4.1" />
@@ -22,10 +28,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AdventOfCode\AdventOfCode.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Inputs\" />
   </ItemGroup>
 
 </Project>
