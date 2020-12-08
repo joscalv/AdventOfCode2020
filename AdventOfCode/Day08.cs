@@ -25,7 +25,7 @@ namespace AdventOfCode
         {
 
             Computer.Computer p = new Computer.Computer(_instructions);
-            p.ExecuteUntilRepeat();
+            p.ExecuteStopWhenLoop();
             return p.GetAcc();
         }
 
@@ -42,25 +42,24 @@ namespace AdventOfCode
             do
             {
                 computer = new Computer.Computer(nextInstructions);
-                computer.ExecuteUntilRepeat();
-                nextInstructions = ReplaceNext(instructions, replaced, out var lastReplaced);
+                computer.ExecuteStopWhenLoop();
+                nextInstructions = SwitchFirstJmpNop(instructions, replaced, out var lastReplaced);
                 replaced = lastReplaced + 1;
             } while (computer.IsFinished() != true && replaced < instructions.Length);
 
             return computer?.IsFinished() == true ? computer.GetAcc() : -1;
         }
 
-        private Instruction[] ReplaceNext(Instruction[] instructions, int replaceFrom, out int lastReplaced)
+        private Instruction[] SwitchFirstJmpNop(Instruction[] instructions, int replaceFrom, out int replaced)
         {
             var result = new Instruction[instructions.Length];
-            var replaced = false;
-            lastReplaced = replaceFrom;
+            replaced = -1;
             for (int i = 0; i < instructions.Length; i++)
             {
-                if (!replaced && i >= replaceFrom 
+                if (replaced < 0 && i >= replaceFrom
                               && (instructions[i].GetCode() == "jmp" || instructions[i].GetCode() == "nop"))
                 {
-                    Instruction instructionToReplace=null;
+                    Instruction instructionToReplace = null;
                     if (instructions[i] is JmpInstruction ins)
                     {
                         instructionToReplace = new NopInstruction(ins.Jump);
@@ -69,10 +68,8 @@ namespace AdventOfCode
                     {
                         instructionToReplace = new JmpInstruction(ins2.Value);
                     }
-
                     result[i] = instructionToReplace;
-                    replaced = true;
-                    lastReplaced = i;
+                    replaced = i;
                 }
                 else
                 {

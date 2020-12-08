@@ -32,7 +32,7 @@ acc +6
         {
             var program = InstructionParser.ParseProgram(_programTest1);
             Computer p = new Computer(program);
-            p.ExecuteUntilRepeat();
+            p.ExecuteStopWhenLoop();
             p.GetAcc().Should().Be(5);
         }
 

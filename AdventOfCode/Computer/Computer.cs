@@ -14,7 +14,7 @@ namespace AdventOfCode.Computer
             _currentState = new State();
         }
 
-        public void ExecuteUntilRepeat()
+        public void ExecuteStopWhenLoop()
         {
             Execute(1);
         }
@@ -25,7 +25,7 @@ namespace AdventOfCode.Computer
             _executed.Clear();
 
             while (_currentState.Pc < _program.Length &&
-                   (loopLimit == -1 || !IsLoop(loopLimit)))
+                   (loopLimit < 0 || !IsLoop(loopLimit)))
             {
                 _currentState = _program[_currentState.Pc].Execute(_currentState);
             }
