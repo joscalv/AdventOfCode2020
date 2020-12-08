@@ -44,6 +44,22 @@ acc +6
             int part1Solution = 1501;
             Assert.Equal(part1Solution, _day08.ExecutePart1());
         }
+        
+        [Fact]
+        public void TestPart1Simpler()
+        {
+            int part1Solution = 1501;
+            var day8 = new Day08Simpler();
+            Assert.Equal(part1Solution, day8.ExecutePart1());
+        } 
+        
+        [Fact]
+        public void TestPart2Simpler()
+        {
+            int part1Solution = 509;
+            var day8 = new Day08Simpler();
+            Assert.Equal(part1Solution, day8.ExecutePart2());
+        }
 
         [Fact]
         public void SamplePart2()
@@ -51,6 +67,13 @@ acc +6
             var program = InstructionParser.ParseProgram(_programTest1);
             Day08 day8 = new Day08();
             day8.ExecutePart2(program).Should().Be(8);
+        }
+
+        [Fact]
+        public void SamplePart2Simpler()
+        {
+            var program = Day08Simpler.Parse(_programTest1);
+            Day08Simpler.ExecutePart2(program).Should().Be(8);
         }
 
         [Fact]
