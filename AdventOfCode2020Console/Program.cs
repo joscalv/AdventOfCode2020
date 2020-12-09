@@ -51,6 +51,9 @@ namespace AdventOfCode2020Console
             ExecuteSolution("8.1", day8Simpler.ExecutePart1);
             ExecuteSolution("8.2", day8Simpler.ExecutePart2);
 
+            var day9 = new Day09();
+            ExecuteSolution("9.1", day9.ExecutePart1);
+            ExecuteSolution("9.2", day9.ExecutePart2);
         }
 
         private static void ExecuteSolution(string title, Func<long> solution)

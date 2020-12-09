@@ -138,7 +138,7 @@ namespace AdventOfCode
                 return false;
             }
 
-            int n = 0;
+            int n;
             if (executions.ContainsKey(pc))
             {
                 n = executions[pc] + 1;
