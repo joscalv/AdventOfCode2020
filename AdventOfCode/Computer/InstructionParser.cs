@@ -25,27 +25,24 @@ namespace AdventOfCode.Computer
 
         public static Instruction Parse(string instruction) => instruction.Substring(0, 3) switch
         {
-            NopInstruction.Code => ParseNopInstruction(instruction),
-            AccInstruction.Code => ParseAccInstruction(instruction),
-            JmpInstruction.Code => ParseJmpInstruction(instruction),
+            NopInstruction.Code => new NopInstruction(ParseValue(instruction)),
+            AccInstruction.Code => new AccInstruction(ParseValue(instruction)),
+            JmpInstruction.Code => new JmpInstruction(ParseValue(instruction)),
             _ => throw new NotImplementedException($"Code {instruction} parse not implemented"),
         };
 
-        public static NopInstruction ParseNopInstruction(string str)
-        {
-            str.MustStartWith(NopInstruction.Code);
-            return new NopInstruction(ParseValue(str));
-        }
+        public static NopInstruction ParseNopInstruction(string str) => new NopInstruction(ParseValue(str));
+        
 
         public static JmpInstruction ParseJmpInstruction(string str)
         {
-            str.MustStartWith(JmpInstruction.Code);
+            //str.MustStartWith(JmpInstruction.Code);
             return new JmpInstruction(ParseValue(str));
         }
 
         public static AccInstruction ParseAccInstruction(string str)
         {
-            str.MustStartWith(AccInstruction.Code);
+            //str.MustStartWith(AccInstruction.Code);
             return new AccInstruction(ParseValue(str));
         }
 

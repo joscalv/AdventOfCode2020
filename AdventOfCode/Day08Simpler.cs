@@ -29,9 +29,9 @@ namespace AdventOfCode
 
         public static SimpleComputer.Instruction Parse(int line, string instruction)
         {
-            var i = instruction.Substring(0, 3);
+            var code = instruction.Substring(0, 3);
             int value = (instruction[4] == '+' ? 1 : -1) * int.Parse(instruction.Substring(5));
-            return new SimpleComputer.Instruction(line, i, value);
+            return new SimpleComputer.Instruction(line, code, value);
         }
 
         public long ExecutePart1()
