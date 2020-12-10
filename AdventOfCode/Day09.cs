@@ -72,7 +72,6 @@ namespace AdventOfCode
 
         public static long[] GetRangeThatSums(long[] input, long objetive)
         {
-            //long objetive = input[sumPosition];
             for (int i = 0; i < input.Length; i++)
             {
                 List<long> tmpList = new List<long>();
