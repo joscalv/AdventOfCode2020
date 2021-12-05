@@ -30,7 +30,9 @@ namespace AdventOfCode
 
         public long ExecutePart2()
         {
-            return 0;
+            PocketDimension dimension = new PocketDimension(_input, CubeDimensions.Four);
+
+            return dimension.RunCyclesAndReturnNumberOfActive(6);
         }
 
         public enum CubeStatus
@@ -40,24 +42,32 @@ namespace AdventOfCode
             Undefined
         }
 
+        public enum CubeDimensions
+        {
+            Three,
+            Four
+        }
+
         public class PocketDimension
         {
-            private readonly HashSet<(int x, int y, int z)> _values;
+            private readonly CubeDimensions _dimensions;
+            private readonly HashSet<(int x, int y, int z, int w)> _values;
             private readonly int _sizeDimension;
 
-            public PocketDimension(CubeStatus[][] values)
+            public PocketDimension(CubeStatus[][] values, CubeDimensions dimensions = CubeDimensions.Three)
             {
-                HashSet<(int, int, int)> map = new HashSet<(int, int, int)>();
+                _dimensions = dimensions;
+                HashSet<(int, int, int, int)> map = new HashSet<(int, int, int, int)>();
                 _sizeDimension = values.Length;
 
-                for (int y = 0; y < values.Length; y++)
+                for (var y = 0; y < values.Length; y++)
                 {
-                    for (int x = 0; x < values[y].Length; x++)
+                    for (var x = 0; x < values[y].Length; x++)
                     {
                         var value = values[y][x];
                         if (value == CubeStatus.Active)
                         {
-                            map.Add((x, y, 0));
+                            map.Add((x, y, 0, 0));
                         }
                     }
                 }
@@ -66,9 +76,9 @@ namespace AdventOfCode
             }
 
 
-            private CubeStatus Get(HashSet<(int, int, int)> values, int x, int y, int z)
+            private CubeStatus Get(HashSet<(int, int, int, int)> values, int x, int y, int z, int w)
             {
-                return values.Contains((x, y, z)) ? CubeStatus.Active : CubeStatus.Inactive;
+                return values.Contains((x, y, z, w)) ? CubeStatus.Active : CubeStatus.Inactive;
             }
 
             public int RunCyclesAndReturnNumberOfActive(int numberOfCycles)
@@ -82,62 +92,74 @@ namespace AdventOfCode
                 return current.Count();
             }
 
-            public HashSet<(int, int, int)> RunCycle(int cycle, HashSet<(int, int, int)> values)
+            public HashSet<(int, int, int, int)> RunCycle(int cycle, HashSet<(int, int, int, int)> values)
             {
 
-                var result = new HashSet<(int, int, int)>();
-                for (var z = 0 - cycle; z <= cycle; z++)
+                var result = new HashSet<(int, int, int, int)>();
+                var wStart = 0;
+                var wEnd = 1;
+                if (_dimensions == CubeDimensions.Four)
                 {
-                    Console.WriteLine($"Z:{z}");
-                    for (var y = (0 - cycle); y < _sizeDimension + cycle; y++)
+                    wStart = 0 - cycle;
+                    wEnd = cycle;
+                }
+                for (var w = wStart; w <= wEnd; w++)
+                {
+                    for (var z = 0 - cycle; z <= cycle; z++)
                     {
-                        for (var x = (0 - cycle); x < _sizeDimension + cycle; x++)
+                        for (var y = 0 - cycle; y < _sizeDimension + cycle; y++)
                         {
-
-                            var value = ApplyRules(values, x, y, z);
-                            if (value == CubeStatus.Active)
+                            for (var x = 0 - cycle; x < _sizeDimension + cycle; x++)
                             {
-                                result.Add((x, y, z));
-                                Console.Write("#");
+
+                                var value = ApplyRules(values, x, y, z, w);
+                                if (value == CubeStatus.Active)
+                                {
+                                    result.Add((x, y, z, w));
+                                }
+
                             }
-                            else { Console.Write("."); }
                         }
-                        Console.WriteLine();
                     }
                 }
 
                 return result;
             }
 
-            public CubeStatus ApplyRules(HashSet<(int, int, int)> values, int x, int y, int z)
+            public CubeStatus ApplyRules(HashSet<(int, int, int, int)> values, int x, int y, int z, int w)
             {
-                var current = Get(values, x, y, z);
+                var current = Get(values, x, y, z, w);
 
                 var active = 0;
-                foreach (var incZ in new[] { 0, -1, 1 })
+                var wInc = _dimensions == CubeDimensions.Four ? new[] { 0, -1, 1 } : new int[] { 0 };
+                ;
+                foreach (var incW in wInc)
                 {
-                    foreach (var incY in new[] { 0, -1, 1 })
+                    foreach (var incZ in new[] { 0, -1, 1 })
                     {
-                        foreach (var incX in new[] { 0, -1, 1 })
+                        foreach (var incY in new[] { 0, -1, 1 })
                         {
-                            if (incY != 0 || incX != 0 || incZ != 0)
+                            foreach (var incX in new[] { 0, -1, 1 })
                             {
-                                var value = Get(values, x + incX, y + incY, z + incZ);
-                                if (value == CubeStatus.Active)
+                                if (incY != 0 || incX != 0 || incZ != 0 || incW != 0)
                                 {
-                                    active++;
-                                }
+                                    var value = Get(values, x + incX, y + incY, z + incZ, w + incW);
+                                    if (value == CubeStatus.Active)
+                                    {
+                                        active++;
+                                    }
 
-                                if (active > 3)
-                                {
-                                    return CubeStatus.Inactive;
+                                    if (active > 3)
+                                    {
+                                        return CubeStatus.Inactive;
+                                    }
                                 }
                             }
                         }
                     }
                 }
 
-                if ((current == CubeStatus.Active && active < 2) || (current == CubeStatus.Inactive && active != 3))
+                if (current == CubeStatus.Active && active < 2 || current == CubeStatus.Inactive && active != 3)
                 {
                     return CubeStatus.Inactive;
                 }

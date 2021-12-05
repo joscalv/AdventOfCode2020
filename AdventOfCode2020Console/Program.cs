@@ -62,7 +62,7 @@ namespace AdventOfCode2020Console
             var day11 = new Day11();
             ExecuteSolution("11.1", day11.ExecutePart1);
             ExecuteSolution("11.2", day11.ExecutePart2);
-            
+
             var day12 = new Day12();
             ExecuteSolution("12.1", day12.ExecutePart1);
             ExecuteSolution("12.2", day12.ExecutePart2);
@@ -75,6 +75,12 @@ namespace AdventOfCode2020Console
             var day15 = new Day15();
             ExecuteSolution("15.1", day15.ExecutePart1);
             ExecuteSolution("15.2", day15.ExecutePart2);
+            var day16 = new Day16();
+            ExecuteSolution("16.1", day16.ExecutePart1);
+            ExecuteSolution("16.2", day16.ExecutePart2);
+            var day17 = new Day17();
+            ExecuteSolution("17.1", day17.ExecutePart1);
+            ExecuteSolution("17.2", day17.ExecutePart2);
         }
 
         private static void ExecuteDay<T1, T2>(IAdventOfCodeDay<T1, T2> day, string title)
