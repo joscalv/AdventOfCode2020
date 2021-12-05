@@ -102,6 +102,10 @@ namespace AdventOfCode
                         .GroupBy(c => c)
                         .Count(g => g.Count() == 1 + l.Count(c => c == '\n')))
                 .Sum();
+            
+            
         }
+
+        
     }
 }
