@@ -6,7 +6,6 @@ namespace AdventOfCode
 
     public class Day13 : IAdventOfCodeDay<long, long>
     {
-        private readonly string[] _input;
         private readonly int _timestamp;
         private readonly int[] _busIds;
         private readonly int[] _allBusIds;
@@ -49,11 +48,7 @@ namespace AdventOfCode
         }
         public long ExecutePart2(int[] busIds)
         {
-            long bus0Runs = 1;
-            var found = false;
-            long candidateTimestpan = 0;
             var maxId = 0;
-            var maxIdOffset = 0;
             var ids = new int[busIds.Count(id => id >= 0)];
             var offsets = new int[busIds.Count(id => id >= 0)];
             int auxIndex = 0;
@@ -62,7 +57,6 @@ namespace AdventOfCode
                 if (busIds[i] > maxId)
                 {
                     maxId = busIds[i];
-                    maxIdOffset = i;
                 }
                 if (busIds[i] >= 0)
                 {

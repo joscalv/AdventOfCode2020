@@ -71,7 +71,6 @@ namespace AdventOfCode
 
         public long ExecutePart2(int[] input)
         {
-            int previousValue = 0;
             var ordered = input
                 .OrderBy(x => x)
                 .ToArray();

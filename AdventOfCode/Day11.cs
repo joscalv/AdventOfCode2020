@@ -249,14 +249,7 @@ namespace AdventOfCode
                 {
                     if ((xInc != 0 || yInc != 0) && InBounds(map, x + xInc, y + yInc))
                     {
-                        try
-                        {
-                            func.Invoke(map[y + yInc][x + xInc]);
-                        }
-                        catch (Exception e)
-                        {
-                            throw;
-                        }
+                        func.Invoke(map[y + yInc][x + xInc]);
                     }
                 }
             }
