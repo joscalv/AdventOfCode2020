@@ -84,6 +84,10 @@ namespace AdventOfCode2020Console
             var day18 = new Day18();
             ExecuteSolution("18.1", day18.ExecutePart1);
             ExecuteSolution("18.2", day18.ExecutePart2);
+            var day19 = new Day19();
+            ExecuteSolution("19.1", day19.ExecutePart1);
+            ExecuteSolution("19.2", day19.ExecutePart2);
+            
         }
 
         private static void ExecuteDay<T1, T2>(IAdventOfCodeDay<T1, T2> day, string title)
